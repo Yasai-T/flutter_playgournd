@@ -33,14 +33,21 @@ class _RandomWordsState extends State<RandomWords> {
   @override
   Widget build(BuildContext context) {
     final _suggestions = <WordPair>[];
+    final _saved = <WordPair>{};
     final _biggerFont = const TextStyle(fontSize: 18.0);
 
     Widget _buildRow(WordPair pair) {
+      final alreadySaved = _saved.contains(pair);
       return ListTile(
-          title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ));
+        title: Text(
+          pair.asPascalCase,
+          style: _biggerFont,
+        ),
+        trailing: Icon(
+          alreadySaved ? Icons.favorite : Icons.favorite_border,
+          color: alreadySaved ? Colors.red : null,
+        ),
+      );
     }
 
     Widget _buildSuggestions() {
